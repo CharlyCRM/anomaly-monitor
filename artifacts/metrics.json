@@ -1,0 +1,50 @@
+{
+  "source": "https://raw.githubusercontent.com/numenta/NAB/master/data/realKnownCause/ambient_temperature_system_failure.csv",
+  "sha256": "230b68ccca20f59d562afd5d24ad52939c9b784386bed0054018358bf9120581",
+  "protocol": "Chronological 35% fit, 15% calibration, 50% test. Label-free 99th percentile thresholds. Pointwise labels derived from NAB windows; not official NAB score.",
+  "split": {
+    "fit": 2539,
+    "calibration": 1089,
+    "test": 3628,
+    "test_start": "2013-12-19 10:00:00",
+    "test_end": "2014-05-28 15:00:00",
+    "anomaly_points_fit": 0,
+    "anomaly_points_calibration": 99
+  },
+  "isolation_forest": {
+    "precision": 0.4,
+    "recall": 0.24880382775119617,
+    "f1": 0.30678466076696165,
+    "false_positives": 234,
+    "alerts": 390
+  },
+  "statistical_baseline": {
+    "precision": 0.37100213219616207,
+    "recall": 0.27751196172248804,
+    "f1": 0.3175182481751825,
+    "false_positives": 295,
+    "alerts": 469
+  },
+  "threshold": 0.6203209353099021,
+  "windows": [
+    {
+      "start": "2013-12-15 07:00:00.000000",
+      "end": "2013-12-30 09:00:00.000000",
+      "detected": true,
+      "baseline_detected": true
+    },
+    {
+      "start": "2014-03-29 15:00:00.000000",
+      "end": "2014-04-20 22:00:00.000000",
+      "detected": true,
+      "baseline_detected": true
+    }
+  ],
+  "distribution_shift_standardized_mean": -0.33896991227194506,
+  "limitations": [
+    "Single labelled series, no generalization claim.",
+    "Window-level labels make pointwise precision/recall sensitive to window size.",
+    "Unsupervised calibration can contain anomalies; contamination counts are reported.",
+    "Shift indicator is descriptive; no causal diagnosis or drift significance test."
+  ]
+}
