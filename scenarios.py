@@ -1,4 +1,7 @@
-"""Read-only synthetic perturbations with frozen models and thresholds."""
+"""Prueba picos y cambios sostenidos sobre copias de las lecturas.
+
+Se mantienen el modelo y los umbrales para comparar ambos escenarios.
+"""
 import numpy as np
 from monitor import FEATURES, features
 

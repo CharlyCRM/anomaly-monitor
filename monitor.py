@@ -1,4 +1,8 @@
-"""Causal time-series anomaly detection; NAB windows, not official NAB scoring."""
+"""Evalúa alertas de temperatura con las ventanas etiquetadas de NAB.
+
+Las variables solo utilizan lecturas disponibles en cada momento.
+La evaluación no reproduce la puntuación oficial del benchmark.
+"""
 
 import hashlib
 import json
@@ -45,7 +49,7 @@ def load_data():
 
 def features(frame):
     result = frame.copy()
-    # Rolling windows use only the current and preceding readings.
+    # La ventana termina en la lectura actual; no incorpora valores futuros.
     result["mean12"] = result.value.rolling(12).mean()
     result["std12"] = result.value.rolling(12).std()
     result["delta"] = result.value.diff()

@@ -1,4 +1,4 @@
-"""Local presentation helpers; no model fitting or external services."""
+"""Estilos y gráficos compartidos por las pantallas de la aplicación."""
 import os
 from html import escape
 from pathlib import Path

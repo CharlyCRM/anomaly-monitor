@@ -19,7 +19,7 @@ saved = joblib.load(ROOT / "artifacts/model.joblib")
 raw = pd.read_csv(ROOT / "data/series.csv", parse_dates=["timestamp"])
 prepared = features(raw)
 fit_end, calibration_end = int(len(prepared) * .35), int(len(prepared) * .5)
-# Reproduce the existing label-free baseline calibration; never fit on scenarios or test.
+# Recuperamos el umbral del bloque de calibración, sin ajustarlo al escenario.
 baseline_threshold = float(np.quantile(np.abs((prepared.iloc[fit_end:calibration_end].value.to_numpy() - saved["center"]) / saved["spread"]), .99))
 
 with st.sidebar:
@@ -62,7 +62,7 @@ with st.container(border=True):
                                 format_func=lambda value: {"spike": "Pico / Spike", "shift": "Cambio sostenido / Sustained shift"}[value])
     amplitude = controls[1].slider("Amplitud / Amplitude", -30.0, 30.0, 10.0, step=.5, key="amplitude")
     position = controls[2].slider("Posición / Position", 0, len(selected) - 1, min(48, len(selected) - 1), key="position")
-    # Retain exactly 11 prior raw readings so the first displayed score has causal context.
+    # Las primeras puntuaciones necesitan once lecturas anteriores a la ventana visible.
     first = raw.index[raw.timestamp == selected.timestamp.iloc[0]][0]
     context = raw.iloc[first - 11:first + len(selected)].copy()
     result = perturb_window(context, saved, kind, amplitude, position + 11, baseline_threshold)
